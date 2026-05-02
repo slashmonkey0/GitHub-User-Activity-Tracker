@@ -15,6 +15,7 @@ repoTracker=[]
 for event in data:
     if event["type"]=="PushEvent":
         if event["repo"]["name"] in eventrepo:
+         pass
         	
         
         else:
