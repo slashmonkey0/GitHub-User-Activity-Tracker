@@ -1,25 +1,20 @@
 import urllib.request
 import json
-class RepoTracker:
-	def __init__(repoName):
-		self.repoName=repoName
-		self.count=0
-	def countIncrease():
-		self.count+=1
+
 username=input("Enter username: ")
 request = urllib.request.urlopen(f"https://api.github.com/users/{username}/events")
 data = request.read()        
 data = json.loads(data)      
-eventrepo=set()
-repoTracker=[]
+counter=[]
+PushEventTracker=[]
 for event in data:
+    repo=event["repo"]["name"]
     if event["type"]=="PushEvent":
-        if event["repo"]["name"] in eventrepo:
-         pass
-        	
-        
+        if repo in PushEventTracker:
+        	index= PushEventTracker.index(repo)
+        	counter[index]+=1   	 
         else:
-        eventrepo.append(RepoTracker(event["repo"]["name"]))
-        
+        	PushEventTracker.push(repo)
+        	counter.push(1)
 
    
